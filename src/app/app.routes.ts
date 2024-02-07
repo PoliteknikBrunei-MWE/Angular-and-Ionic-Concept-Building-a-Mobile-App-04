@@ -3,7 +3,11 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '',
+    redirectTo: 'recipes',
     pathMatch: 'full',
+  },
+  {
+    path: 'recipes',
+    loadComponent: () => import('./recipes/recipes.page').then( m => m.RecipesPage)
   },
 ];

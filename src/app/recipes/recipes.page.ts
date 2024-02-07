@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Recipe } from './recipes.modal';
+import { RecipesService } from './recipes.service';
 
 @Component({
   selector: 'app-recipes',
@@ -13,23 +14,11 @@ import { Recipe } from './recipes.modal';
 })
 export class RecipesPage implements OnInit {
 
-  constructor() { }
+  recipes: Recipe[];
+  
+  constructor(private recipeService: RecipesService) { }
 
   ngOnInit() {
+    this.recipes = this.recipeService.getAllRecipes();
   }
-
-  recipes: Recipe[] = [
-    {
-      id: 'r1',
-      title: 'Schnitzel',
-      imageUrl: 'http://mwe.politeknikbrunei.com/Schnitzel.jpg',
-      ingredients: ['French Fries', 'Chicken Meat', 'Salad']
-    },
-    {
-      id: 'r2',
-      title: 'Aglio Olio',
-      imageUrl: 'http://mwe.politeknikbrunei.com/Aglio-pasta.jpg',
-      ingredients: ['Pasta', 'Garlic', 'Tomatoes']
-    },
-  ];
 }

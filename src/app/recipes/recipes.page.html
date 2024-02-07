@@ -10,4 +10,16 @@
       <ion-title size="large">recipes</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <ion-item *ngFor="let recipe of recipes">
+      <ion-avatar slot="start">
+        <ion-img [src]="recipe.imageUrl" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ recipe.title }}</h2>
+        <p>{{ recipe.ingredients }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -15,7 +15,7 @@ import { Recipe } from '../recipes.modal';
 })
 export class RecipeDetailPage implements OnInit {
 
-  loadedRecipe: Recipe;
+  loadedRecipe: Recipe | undefined;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private recipesService: RecipesService) { }
@@ -28,7 +28,12 @@ export class RecipeDetailPage implements OnInit {
       } 
       const recipeId = paramMap.get('recipeId');
       // fetch recipe
-      this.loadedRecipe = this.recipesService.getRecipe(recipeId);
+      this.loadedRecipe = this.recipesService.getRecipe(recipeId!) as Recipe | undefined;
+      if (this.loadedRecipe === undefined) {
+        // handle undefined case
+        
+        return;
+      }
     });
   }
 

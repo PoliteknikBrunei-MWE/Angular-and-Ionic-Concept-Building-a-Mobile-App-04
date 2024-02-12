@@ -14,7 +14,7 @@ import { RecipesService } from './recipes.service';
 })
 export class RecipesPage implements OnInit {
 
-  recipes: Recipe[];
+  recipes!: Recipe[];
   
   constructor(private recipeService: RecipesService) { }
 

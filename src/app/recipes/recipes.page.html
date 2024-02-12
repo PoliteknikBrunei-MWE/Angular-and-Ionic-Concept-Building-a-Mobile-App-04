@@ -12,14 +12,19 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let recipe of recipes">
-      <ion-avatar slot="start">
-        <ion-img [src]="recipe.imageUrl" />
-      </ion-avatar>
-      <ion-label>
-        <h2>{{ recipe.title }}</h2>
-        <p>{{ recipe.ingredients }}</p>
-      </ion-label>
-    </ion-item>
+    <ion-list>
+      <ion-item
+        *ngFor="let recipe of recipes"
+        [routerLink]="['/recipes', recipe.id]"
+      >
+        <ion-avatar slot="start">
+          <ion-img [src]="recipe.imageUrl" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ recipe.title }}</h2>
+          <p>{{ recipe.ingredients }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </ion-list>
 </ion-content>

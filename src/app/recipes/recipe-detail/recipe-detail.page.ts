@@ -43,4 +43,8 @@ export class RecipeDetailPage implements OnInit {
     });
   }
 
+  onDeleteRecipe() {
+    this.recipesService.deleteRecipe(this.loadedRecipe!.id);
+  }
+
 }

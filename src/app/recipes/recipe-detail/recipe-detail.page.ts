@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { RecipesService } from '../recipes.service';
 import { Recipe } from '../recipes.modal';
+import { addIcons } from 'ionicons';
+import { trash } from 'ionicons/icons';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -17,8 +19,12 @@ export class RecipeDetailPage implements OnInit {
 
   loadedRecipe: Recipe | undefined;
 
-  constructor(private activatedRoute: ActivatedRoute, 
-    private recipesService: RecipesService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute, 
+    private recipesService: RecipesService
+    ) { 
+      addIcons({trash});
+    }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {

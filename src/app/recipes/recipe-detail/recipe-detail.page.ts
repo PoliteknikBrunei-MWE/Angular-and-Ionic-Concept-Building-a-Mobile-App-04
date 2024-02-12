@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from '../recipes.service';
 import { Recipe } from '../recipes.modal';
 import { addIcons } from 'ionicons';
@@ -21,7 +21,8 @@ export class RecipeDetailPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute, 
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private router: Router
     ) { 
       addIcons({trash});
     }
@@ -41,6 +42,11 @@ export class RecipeDetailPage implements OnInit {
         return;
       }
     });
+  }
+
+  onDeleteRecipe() {
+    this.recipesService.deleteRecipe(this.loadedRecipe!.id);
+    this.router.navigate(['/recipes']);
   }
 
 }

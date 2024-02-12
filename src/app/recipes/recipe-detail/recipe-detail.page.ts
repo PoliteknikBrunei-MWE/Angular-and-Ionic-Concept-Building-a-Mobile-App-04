@@ -30,16 +30,30 @@ export class RecipeDetailPage implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
-      if (!paramMap.has('recipeId')) {
+      if (!paramMap.has('recipeId')){
         // redirect
+        this.router.navigate(['/recipes']);
         return;
       } 
       const recipeId = paramMap.get('recipeId');
       // fetch recipe
       this.loadedRecipe = this.recipesService.getRecipe(recipeId!) as Recipe | undefined;
-      if (this.loadedRecipe === undefined) {
+      if (this.loadedRecipe === undefined || Object.keys(this.loadedRecipe).length === 0) {
         // handle undefined case
-        
+        this.alertController.create({
+          header: 'Recipe not found',
+          message: 'Seems like the recipe has been removed or does not exist.',
+          buttons: [
+            {
+              text: 'Ok',
+              handler: () => {
+              this.router.navigate(['/recipes']);
+              }
+            }
+          ]
+        }).then(alertEl => {
+          alertEl.present();
+        });
         return;
       }
     });
@@ -57,8 +71,8 @@ export class RecipeDetailPage implements OnInit {
         {
           text: 'Delete',
           handler: () => {
-    this.recipesService.deleteRecipe(this.loadedRecipe!.id);
-    this.router.navigate(['/recipes']);
+            this.recipesService.deleteRecipe(this.loadedRecipe!.id);
+            this.router.navigate(['/recipes']);
           }
         }
       ]
